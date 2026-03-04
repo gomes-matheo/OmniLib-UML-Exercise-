@@ -70,10 +70,8 @@ U1 <. U2 : extends
 U3 <.- L2 : extends
 U5 -.> P1 : include
 L1 .> L2 : include
-L2 <.- P1 : include
+L2 <. P1 : include
 
-U3 -.> C2 : include
-U4 -.> C2 : include
-U5 -.> C2 : include
+
 
 @enduml
