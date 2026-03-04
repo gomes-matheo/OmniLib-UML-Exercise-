@@ -1,0 +1,79 @@
+@startuml
+
+left to right direction
+
+together {
+  actor :visiteur: as ACT1
+  actor :adhérent "Standard": as ACT2
+  actor :adhérent "Premium": as ACT3
+  actor :bibliothécaire: as ACT4
+  
+}
+
+together {
+  actor :Service de Paiement: as ACTS1
+  actor :Service de livraison: as ACTS2
+  
+}
+
+rectangle "OmniLib" {
+  package "Catalogue" {
+    usecase "Accéder au catalogue" as U1
+    usecase "Rechercher un livre" as U2
+    usecase "Réserver un livre physique" as U3
+    usecase "Télécharger un E-book" as U4
+    usecase "Louer une VOD" as U5
+  }
+  
+  package "Compte" {
+    usecase "Créer un compte" as C1
+    usecase "S'identifier" as C2
+  }
+  
+  package "Paiement" {
+    usecase "Payer" as P1
+  }
+  
+  package "Livraison" {
+    usecase "Livrer à domicile" as L1
+    usecase "Acheter titre livraison" as L2
+  }
+  
+  package "Administration" {
+    usecase "Gérer le catalogue" as A1
+    usecase "Valider les retours" as A2
+  }
+}
+
+ACT1 <|- ACT2
+ACT2 <|- ACT3
+
+
+ACT1 -- U1
+
+ACT2 -- U3
+ACT3 -- U4
+ACT3 -- U5
+
+ACT4 -- A1
+ACT4 -- A2
+
+ACT1 -- C1
+C1 <. C2 : extends
+
+P1 -- ACTS1
+L1 -- ACTS2
+
+U1 <. U2 : extends
+
+
+U3 <.- L2 : extends
+U5 -.> P1 : include
+L1 .> L2 : include
+L2 <.- P1 : include
+
+U3 -.> C2 : include
+U4 -.> C2 : include
+U5 -.> C2 : include
+
+@enduml
