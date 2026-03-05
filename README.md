@@ -60,7 +60,6 @@ flowchart TD
     END([Fin du programme])
 ```
 
-Diagramme de classe :
 
 ## DIAGRAMME DE CLASSE
 ```mermaid
