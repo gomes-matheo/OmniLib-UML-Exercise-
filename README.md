@@ -116,29 +116,29 @@ classDiagram
         + String adresseMail
         + String mdp
 
-        + verifierAbonnement() : boolean
-        + accesLivre() : boolean
-        + accesEbook() : boolean
-        + accesVod() : boolean
+        + verifierAbonnement() boolean
+        + accesLivre() boolean
+        + accesEbook() boolean
+        + accesVod() boolean
     }
 
 
     class AdherentStandard {
         + List~Livres_Physiques~ livres
-        + verifierAbonnement() : boolean
+        + verifierAbonnement() boolean
     }
 
     class AdherentPremium {
         + List~Ebooks~ ebooks
         + List~Vod~ vods
-        + accesEbook() : boolean
-        + accesVod() : boolean
+        + accesEbook() boolean
+        + accesVod() boolean
 
-        + verifierAbonnement : boolean
+        + verifierAbonnement boolean
     }
 
     class Bibliothecaire {
-        +accesVerification() : boolean
+        +accesVerification() boolean
     }
 
     Utilisateur <|-- AdherentStandard : est un
