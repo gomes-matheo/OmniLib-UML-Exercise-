@@ -2,9 +2,11 @@
 
 UML exercise (usecase, activity diagram, class diagram)
 
+## DIAGRAMME DE CAS D'UTILISATION
 ![use-cases-diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/gomes-matheo/OmniLib-UML-Exercise-/main/Diagramme_Cas_Utilisation.iuml)
 
 
+## DIAGRAMME D'ACTIVITE (Réservation d'un livre)
 ```mermaid
 flowchart TD
     Start[Entrée du programme]
@@ -58,4 +60,99 @@ flowchart TD
     END([Fin du programme])
 ```
 
+Diagramme de classe :
+
+## DIAGRAMME DE CLASSE
+```mermaid
+classDiagram
+
+        class Bibliotheque {
+        - List~Livres_Physiques~ livres
+        - List~Ebook~ ebooks
+        - List~Vod~ vods
+
+        + seConnecter(String adresseMail, String mdp)
+
+        + chercherDocument()
+
+        + reserverLivrePhysique(Livre livre, Utilisateur utilisateur)
+        + livrerADomicile()
+
+        + telechargementEbook(Ebook ebook, Utilisateur utilisateur)
+        + locationVod(Vod vod, Utilisateur utilisateur)
+
+        + verifierDureeEmprunt(Livre livre, Utilisateur utilisateur)
+        + verifierPenalitesRetard(Utilisateur utilisateur)
+
+    }
+
+    class Document {
+        <<abstract>>
+        + String auteur
+        + String titre
+        + int anneeEdition
+    }
+
+    class Livres_Physiques {
+        + String codeBarre
+        + String rayonSpecifique
+        + String etatUsure
+    }
+
+    class Ebook {
+        + int poids
+        + String format
+    }
+
+    class Vod {
+        + int duree
+        + String resolution
+
+    }
+
+    class Utilisateur {
+        <<abstract>>
+        + String nom
+        + String prenom
+        + String adresseMail
+        + String mdp
+
+        + verifierAbonnement() : boolean
+        + accesLivre() : boolean
+        + accesEbook() : boolean
+        + accesVod() : boolean
+    }
+
+
+    class AdherentStandard {
+        + List~Livres_Physiques~ livres
+        + verifierAbonnement() : boolean
+    }
+
+    class AdherentPremium {
+        + List~Ebooks~ ebooks
+        + List~Vod~ vods
+        + accesEbook() : boolean
+        + accesVod() : boolean
+
+        + verifierAbonnement : boolean
+    }
+
+    class Bibliothecaire {
+        +accesVerification() : boolean
+    }
+
+    Utilisateur <|-- AdherentStandard : est un
+    Utilisateur <|-- AdherentPremium : est un
+    Utilisateur <|-- Bibliothecaire : est un
+    Document <|-- Livres_Physiques
+    Document <|-- Ebook
+    Document <|-- Vod
+    Bibliotheque <.. Utilisateur : dépendance
+    Document *-- Bibliotheque : composition
+
+    AdherentPremium --> Ebook : navigabilité
+    AdherentPremium --> Vod : navigabilité
+    AdherentStandard --> Livres_Physiques : navigabilité
+```
 
